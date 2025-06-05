@@ -1543,15 +1543,68 @@
                 </div>
 
                 <!-- Day Tabs -->
-                <div class="day-tabs">
-                  <button class="day-tab active">Monday</button>
-                  <button class="day-tab">Tuesday</button>
-                  <button class="day-tab">Wednesday</button>
-                  <button class="day-tab">Thursday</button>
-                  <button class="day-tab">Friday</button>
-                  <button class="day-tab">Saturday</button>
-                  <button class="day-tab">Sunday</button>
+                <div class="day-tabs" id="dayTabs">
+                  <button class="day-tab"></button>
+                  <button class="day-tab"></button>
+                  <button class="day-tab"></button>
+                  <button class="day-tab"></button>
+                  <button class="day-tab"></button>
+                  <button class="day-tab"></button>
+                  <button class="day-tab"></button>
                 </div>
+
+                <script>
+                  const dayTabs =
+                    document.querySelectorAll("#dayTabs .day-tab");
+                  const today = new Date(); // current date
+                  const startOfWeek = new Date(today); // start from Monday
+                  const dayIndex = today.getDay(); // 0 = Sunday
+
+                  // Adjust to Monday-start week
+                  startOfWeek.setDate(today.getDate() - ((dayIndex + 6) % 7));
+
+                  const days = [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                  ];
+                  const monthNames = [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                  ];
+
+                  dayTabs.forEach((tab, index) => {
+                    const date = new Date(startOfWeek);
+                    date.setDate(startOfWeek.getDate() + index);
+                    const formatted = `${days[index]}<br><small>(${
+                      monthNames[date.getMonth()]
+                    } ${date.getDate()})</small>`;
+                    tab.innerHTML = formatted;
+
+                    // Highlight today's tab
+                    if (
+                      date.getDate() === today.getDate() &&
+                      date.getMonth() === today.getMonth() &&
+                      date.getFullYear() === today.getFullYear()
+                    ) {
+                      tab.classList.add("active");
+                    }
+                  });
+                </script>
 
                 <!-- Time Slots -->
                 <div class="time-slots">
@@ -1708,22 +1761,6 @@
               </p>
             </div>
 
-            <div class="coupon-cart">
-              <h6 class="text-content mb-2 fw-bold">Discount Code</h6>
-              <div class="mb-3 coupon-box">
-                <i class="fa-solid fa-ticket"></i>
-                <input
-                  type="text"
-                  class="coupon-input"
-                  id="couponCodeInput"
-                  placeholder="Enter Coupon Code Here..."
-                  value="BOOKRIDE50"
-                />
-                <button class="btn-apply">
-                  <i class="fa-solid fa-check text-white m-0"></i>
-                </button>
-              </div>
-            </div>
             <div class="summery-box p-sticky">
               <div class="summery-contain">
                 <ul>

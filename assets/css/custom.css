@@ -1603,3 +1603,22 @@ select {
   height: 20px;
   cursor: pointer;
 }
+
+.day-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.day-tab {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.day-tab.active {
+  background: #00aaff;
+  color: #fff;
+  font-weight: bold;
+  border-color: #00aaff;
+}
